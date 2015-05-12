@@ -66,7 +66,19 @@ output$mainappUI <- renderUI({
                     column(width = 9,
                            plotOutput(outputId = "plot")
                            )
-                    )
+                    ),
+                fluidRow(
+                    column(width = 6,
+                           wellPanel(style = "height: 200px; word-wrap: break-word; overflow-y: scroll",
+                                     htmlOutput("gene_summary")
+                                     )
+                           ),
+                    column(width = 6,
+                           wellPanel(style = "height: 200px; word-wrap: break-word; overflow-y: scroll",
+                                     tableOutput(outputId = "contents")
+                                     )
+                           )
+                    )                   
                 )
 	}
 })
@@ -115,13 +127,12 @@ output$contents <- renderTable({
     # column will contain the local filenames where the data can
     # be found.
     inFile <- input$file1
-
     if (is.null(inFile)) {
         return(NULL)
+    } else {          
+        read.csv(inFile$datapath, header=input$header, sep=input$sep,
+                 quote=input$quote)
     }
-          
-    read.csv(inFile$datapath, header=input$header, sep=input$sep,
-             quote=input$quote)
 })
 
 
