@@ -5,7 +5,7 @@ load("users.RData")
 ##--------------------------------------------------------------
 ## Define the server behavior for the app
 ##--------------------------------------------------------------
-shinyServer(function(input, output) {
-	source("www/Login.R",  local = TRUE)
-	source("www/appUI.R", local = TRUE)
-})
+function(input, output) {
+    source("www/Login.R", local = TRUE)
+    source("www/appUI.R", local = TRUE)
+}
